@@ -228,16 +228,13 @@ module DataMapper
             # Better error message in case port is no Numeric value
             port = @options[:port].nil? ? nil : @options[:port].to_int
 
-            DataObjects::URI.new(
+            DataObjects::URI.new(@options.merge(
               :scheme     => @options[:adapter],
               :user       => @options[:user] || @options[:username],
-              :password   => @options[:password],
-              :host       => @options[:host],
               :port       => port,
               :path       => @options[:path] || @options[:database],
-              :query      => query,
-              :fragment   => @options[:fragment]
-            ).freeze
+              :query      => query
+            )).freeze
           end
       end
 
